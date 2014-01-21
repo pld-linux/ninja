@@ -14,6 +14,7 @@ URL:		http://martine.github.com/ninja/
 Source1:	%{name}.vim
 BuildRequires:	asciidoc
 BuildRequires:	libstdc++-devel
+BuildRequires:	rpmbuild(macros) >= 1.673
 Obsoletes:	ninja-build < 1.0.0-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
