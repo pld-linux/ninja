@@ -2,6 +2,10 @@
 # - vim subpackage
 # - zsh completions subpackage
 # - emacs subpackage
+#
+# Conditional build:
+%bcond_with	bootstrap		# do bootstrap build
+
 Summary:	A small build system with a focus on speed
 Name:		ninja
 Version:	1.0.0
@@ -15,6 +19,7 @@ Source1:	%{name}.vim
 BuildRequires:	asciidoc
 BuildRequires:	libstdc++-devel
 BuildRequires:	rpmbuild(macros) >= 1.673
+%{!?with_bootstrap:BuildRequires:	ninja}
 Obsoletes:	ninja-build < 1.0.0-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,8 +47,17 @@ bash-completion for %{name}.
 %build
 export CXX="%{__cxx}"
 export CFLAGS="%{rpmcflags}"
+
+%if %{with bootstrap}
 ./bootstrap.py --verbose -- --debug
-./ninja -v manual
+export PATH=$(pwd):$PATH
+%else
+./configure.py
+ninja -v
+%endif
+
+# build manual
+ninja -v manual
 
 %install
 rm -rf $RPM_BUILD_ROOT
