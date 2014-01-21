@@ -5,6 +5,7 @@
 #
 # Conditional build:
 %bcond_with	bootstrap		# do bootstrap build
+%bcond_without	doc			# don't build doc
 
 Summary:	A small build system with a focus on speed
 Name:		ninja
@@ -16,10 +17,10 @@ Source0:	https://github.com/martine/ninja/archive/v%{version}.tar.gz
 # Source0-md5:	51f58e418d215ffc165cb9c5ad6cf0d7
 URL:		http://martine.github.com/ninja/
 Source1:	%{name}.vim
-BuildRequires:	asciidoc
+%{?with_doc:BuildRequires:	asciidoc}
 BuildRequires:	libstdc++-devel
-BuildRequires:	rpmbuild(macros) >= 1.673
 %{!?with_bootstrap:BuildRequires:	ninja}
+BuildRequires:	rpmbuild(macros) >= 1.673
 Obsoletes:	ninja-build < 1.0.0-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -41,6 +42,29 @@ BuildArch:	noarch
 %description -n bash-completion-%{name}
 bash-completion for %{name}.
 
+%package doc
+Summary:	Manual for %{name}
+Summary(fr.UTF-8):	Documentation pour %{name}
+Summary(it.UTF-8):	Documentazione di %{name}
+Summary(pl.UTF-8):	Podręcznik dla %{name}
+Group:		Documentation
+# noarch subpackages only when building with rpm5
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description doc
+Documentation for %{name}.
+
+%description doc -l fr.UTF-8
+Documentation pour %{name}.
+
+%description doc -l it.UTF-8
+Documentazione di %{name}.
+
+%description doc -l pl.UTF-8
+Dokumentacja do %{name}.
+
 %prep
 %setup -q
 
@@ -57,7 +81,7 @@ ninja -v
 %endif
 
 # build manual
-ninja -v manual
+%{?with_doc:ninja -v manual}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -86,12 +110,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING README doc/manual.html
+%doc COPYING README
 %attr(755,root,root) %{_bindir}/ninja
 
 %files -n bash-completion-%{name}
 %defattr(644,root,root,755)
 %{bash_compdir}/%{name}
+
+%if %{with doc}
+%files doc
+%defattr(644,root,root,755)
+%doc doc/manual.html
+%endif
 
 %if 0
 # emacs
