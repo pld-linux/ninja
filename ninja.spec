@@ -15,7 +15,6 @@ Group:		Development/Tools
 Source0:	https://github.com/martine/ninja/archive/v%{version}.tar.gz
 # Source0-md5:	51f58e418d215ffc165cb9c5ad6cf0d7
 URL:		http://martine.github.com/ninja/
-Source1:	%{name}.vim
 %{?with_doc:BuildRequires:	asciidoc}
 BuildRequires:	libstdc++-devel
 %{!?with_bootstrap:BuildRequires:	ninja}
@@ -40,21 +39,6 @@ BuildArch:	noarch
 
 %description -n bash-completion-%{name}
 bash-completion for %{name}.
-
-%package -n vim-syntax-%{name}
-Summary:	%{name} syntax files for Vim
-Summary(pl.UTF-8):	Pliki składni %{name} dla Vima
-Group:		Applications/Editors
-Requires:	vim-rt >= 4:7.2.170
-%if "%{_rpmversion}" >= "5"
-BuildArch:	noarch
-%endif
-
-%description -n vim-syntax-%{name}
-%{name} syntax files for vim.
-
-%description -n vim-syntax-%{name} -l pl.UTF-8
-Pliki składni %{name} dla Vima.
 
 %package doc
 Summary:	Manual for %{name}
@@ -106,10 +90,6 @@ install -p %{name} $RPM_BUILD_ROOT%{_bindir}
 install -d $RPM_BUILD_ROOT%{bash_compdir}
 cp -p misc/bash-completion $RPM_BUILD_ROOT%{bash_compdir}/%{name}
 
-install -p -d $RPM_BUILD_ROOT%{_vimdatadir}/{ftdetect,syntax}
-cp -p misc/ninja.vim $RPM_BUILD_ROOT%{_vimdatadir}/syntax
-cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_vimdatadir}/ftdetect
-
 %if 0
 install -p -d $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
 install -p misc/ninja-mode.el $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp/ninja-mode.el
@@ -129,11 +109,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -n bash-completion-%{name}
 %defattr(644,root,root,755)
 %{bash_compdir}/%{name}
-
-%files -n vim-syntax-%{name}
-%defattr(644,root,root,755)
-%{_vimdatadir}/ftdetect/%{name}.vim
-%{_vimdatadir}/syntax/%{name}.vim
 
 %if %{with doc}
 %files doc
