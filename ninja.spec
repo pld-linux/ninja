@@ -1,5 +1,4 @@
 # TODO
-# - vim subpackage
 # - zsh completions subpackage
 # - emacs subpackage
 #
@@ -41,6 +40,21 @@ BuildArch:	noarch
 
 %description -n bash-completion-%{name}
 bash-completion for %{name}.
+
+%package -n vim-syntax-%{name}
+Summary:	%{name} syntax files for Vim
+Summary(pl.UTF-8):	Pliki składni %{name} dla Vima
+Group:		Applications/Editors
+Requires:	vim-rt >= 4:7.2.170
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description -n vim-syntax-%{name}
+%{name} syntax files for vim.
+
+%description -n vim-syntax-%{name} -l pl.UTF-8
+Pliki składni %{name} dla Vima.
 
 %package doc
 Summary:	Manual for %{name}
@@ -92,14 +106,13 @@ install -p %{name} $RPM_BUILD_ROOT%{_bindir}
 install -d $RPM_BUILD_ROOT%{bash_compdir}
 cp -p misc/bash-completion $RPM_BUILD_ROOT%{bash_compdir}/%{name}
 
+install -p -d $RPM_BUILD_ROOT%{_vimdatadir}/{ftdetect,syntax}
+cp -p misc/ninja.vim $RPM_BUILD_ROOT%{_vimdatadir}/syntax
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_vimdatadir}/ftdetect
+
 %if 0
 install -p -d $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
 install -p misc/ninja-mode.el $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp/ninja-mode.el
-
-install -p -d $RPM_BUILD_ROOT%{_datadir}/vim/vimfiles/syntax
-install -p misc/ninja.vim $RPM_BUILD_ROOT%{_datadir}/vim/vimfiles/syntax/ninja.vim
-install -p -d $RPM_BUILD_ROOT%{_datadir}/vim/vimfiles/ftdetect
-install -p %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/vim/vimfiles/ftdetect/ninja.vim
 
 install -p -d $RPM_BUILD_ROOT%{_datadir}/zsh/site-functions
 install -p misc/zsh-completion $RPM_BUILD_ROOT%{_datadir}/zsh/site-functions/_ninja
@@ -117,6 +130,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{bash_compdir}/%{name}
 
+%files -n vim-syntax-%{name}
+%defattr(644,root,root,755)
+%{_vimdatadir}/ftdetect/%{name}.vim
+%{_vimdatadir}/syntax/%{name}.vim
+
 %if %{with doc}
 %files doc
 %defattr(644,root,root,755)
@@ -126,9 +144,6 @@ rm -rf $RPM_BUILD_ROOT
 %if 0
 # emacs
 %{_datadir}/emacs/site-lisp/ninja-mode.el
-# vim
-%{_datadir}/vim/vimfiles/syntax/ninja.vim
-%{_datadir}/vim/vimfiles/ftdetect/ninja.vim
 
 # zsh does not have a -filesystem package
 %{_datadir}/zsh/
