@@ -8,12 +8,12 @@
 
 Summary:	A small build system with a focus on speed
 Name:		ninja
-Version:	1.3.0
+Version:	1.3.4
 Release:	1
 License:	Apache v2.0
 Group:		Development/Tools
 Source0:	https://github.com/martine/ninja/archive/v%{version}.tar.gz
-# Source0-md5:	b497411991a6654890e95e9e3bbb3d95
+# Source0-md5:	83ca09927b0f617ebe402883fe91bc7f
 URL:		http://martine.github.com/ninja/
 %{?with_doc:BuildRequires:	asciidoc}
 BuildRequires:	libstdc++-devel
