@@ -14,6 +14,7 @@ License:	Apache v2.0
 Group:		Development/Tools
 Source0:	https://github.com/martine/ninja/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	59f4f1cf5d9bb0d7877a6d5a5afd770a
+Patch0:		LFS.patch
 URL:		http://martine.github.com/ninja/
 %{?with_doc:BuildRequires:	asciidoc}
 BuildRequires:	libstdc++-devel
@@ -65,6 +66,7 @@ Dokumentacja do %{name}.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 export CXX="%{__cxx}"
