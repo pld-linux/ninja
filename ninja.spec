@@ -8,12 +8,12 @@
 
 Summary:	A small build system with a focus on speed
 Name:		ninja
-Version:	1.5.1
+Version:	1.5.3
 Release:	1
 License:	Apache v2.0
 Group:		Development/Tools
 Source0:	https://github.com/martine/ninja/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	59f4f1cf5d9bb0d7877a6d5a5afd770a
+# Source0-md5:	67d11a83dceea0378908ce5e7477b6fb
 Patch0:		LFS.patch
 URL:		http://martine.github.com/ninja/
 %{?with_doc:BuildRequires:	asciidoc}
@@ -73,7 +73,7 @@ export CXX="%{__cxx}"
 export CFLAGS="%{rpmcflags}"
 
 %if %{with bootstrap}
-./bootstrap.py --verbose -- --debug
+./configure.py --bootstrap
 export PATH=$(pwd):$PATH
 %else
 ./configure.py
