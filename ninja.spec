@@ -6,14 +6,14 @@
 Summary:	A small build system with a focus on speed
 Summary(pl.UTF-8):	Mały system budowania ukierunkowany na szybkość
 Name:		ninja
-Version:	1.6.0
+Version:	1.7.2
 Release:	1
 License:	Apache v2.0
 Group:		Development/Tools
-Source0:	https://github.com/martine/ninja/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	254133059f2da79d8727f654d7198f43
-Patch0:		LFS.patch
-URL:		http://martine.github.io/ninja/
+#Source0Download: https://github.com/ninja-build/ninja/releases
+Source0:	https://github.com/ninja-build/ninja/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	7b482218757acbaeac4d4d54a3cd94e1
+URL:		http://ninja-build.org/
 %{?with_doc:BuildRequires:	asciidoc}
 BuildRequires:	libstdc++-devel
 %{!?with_bootstrap:BuildRequires:	ninja}
@@ -88,6 +88,9 @@ Summary(pl.UTF-8):	Tryb Ninja dla Emacsa
 Group:		Applications/Editors
 Requires:	%{name} = %{version}-%{release}
 Requires:	emacs
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n emacs-ninja-mode
 Ninja mode for Emacs.
@@ -97,11 +100,10 @@ Tryb Ninja dla Emacsa.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 export CXX="%{__cxx}"
-export CFLAGS="%{rpmcxxflags}"
+export CFLAGS="%{rpmcxxflags} -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
 
 ./configure.py \
 	%{?with_bootstrap:--bootstrap} \
