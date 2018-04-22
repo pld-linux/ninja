@@ -16,7 +16,7 @@ Source0:	https://github.com/ninja-build/ninja/archive/v%{version}/%{name}-%{vers
 URL:		http://ninja-build.org/
 %{?with_doc:BuildRequires:	asciidoc}
 BuildRequires:	libstdc++-devel
-%{!?with_bootstrap:BuildRequires:	ninja}
+%{!?with_bootstrap:BuildRequires:	ninja >= 1.3}
 BuildRequires:	python >= 2.0
 BuildRequires:	rpmbuild(macros) >= 1.673
 Obsoletes:	ninja-build < 1.0.0-2
