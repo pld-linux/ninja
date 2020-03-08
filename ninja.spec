@@ -6,13 +6,13 @@
 Summary:	A small build system with a focus on speed
 Summary(pl.UTF-8):	Mały system budowania ukierunkowany na szybkość
 Name:		ninja
-Version:	1.9.0
+Version:	1.10.0
 Release:	1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/ninja-build/ninja/releases
 Source0:	https://github.com/ninja-build/ninja/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	f340be768a76724b83e6daab69009902
+# Source0-md5:	cf1d964113a171da42a8940e7607e71a
 URL:		http://ninja-build.org/
 %{?with_doc:BuildRequires:	asciidoc}
 BuildRequires:	libstdc++-devel
@@ -39,8 +39,7 @@ jak najszybciej.
 Summary:	Manual for Ninja build system
 Summary(pl.UTF-8):	Podręcznik do systemu budowania Ninja
 Group:		Documentation
-# noarch subpackages only when building with rpm5
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -56,7 +55,7 @@ Summary(pl.UTF-8):	Bashowe dopełnianie parametrów polecenia ninja
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	bash-completion >= 2.0
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -72,7 +71,7 @@ Summary(pl.UTF-8):	Dopełnianie parametrów polecenia ninja dla powłoki zsh
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	zsh
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -88,7 +87,7 @@ Summary(pl.UTF-8):	Tryb Ninja dla Emacsa
 Group:		Applications/Editors
 Requires:	%{name} = %{version}-%{release}
 Requires:	emacs
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -137,7 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING README
+%doc README.md
 %attr(755,root,root) %{_bindir}/ninja
 
 %if %{with doc}
