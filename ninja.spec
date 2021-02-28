@@ -39,9 +39,7 @@ jak najszybciej.
 Summary:	Manual for Ninja build system
 Summary(pl.UTF-8):	Podręcznik do systemu budowania Ninja
 Group:		Documentation
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description doc
 Manual for Ninja build system.
@@ -55,9 +53,7 @@ Summary(pl.UTF-8):	Bashowe dopełnianie parametrów polecenia ninja
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	bash-completion >= 2.0
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description -n bash-completion-%{name}
 Bash completion for ninja command.
@@ -71,9 +67,7 @@ Summary(pl.UTF-8):	Dopełnianie parametrów polecenia ninja dla powłoki zsh
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	zsh
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description -n zsh-completion-%{name}
 zsh completion for ninja command.
@@ -87,9 +81,7 @@ Summary(pl.UTF-8):	Tryb Ninja dla Emacsa
 Group:		Applications/Editors
 Requires:	%{name} = %{version}-%{release}
 Requires:	emacs
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description -n emacs-ninja-mode
 Ninja mode for Emacs.
