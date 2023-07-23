@@ -6,18 +6,19 @@
 Summary:	A small build system with a focus on speed
 Summary(pl.UTF-8):	Mały system budowania ukierunkowany na szybkość
 Name:		ninja
-Version:	1.10.0
+Version:	1.11.1
 Release:	1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/ninja-build/ninja/releases
 Source0:	https://github.com/ninja-build/ninja/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	cf1d964113a171da42a8940e7607e71a
+# Source0-md5:	32151c08211d7ca3c1d832064f6939b0
 URL:		http://ninja-build.org/
 %{?with_doc:BuildRequires:	asciidoc}
 BuildRequires:	libstdc++-devel
 %{!?with_bootstrap:BuildRequires:	ninja >= 1.3}
 BuildRequires:	python >= 2.0
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.673
 Obsoletes:	ninja-build < 1.0.0-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -52,7 +53,7 @@ Summary:	Bash completion for ninja command
 Summary(pl.UTF-8):	Bashowe dopełnianie parametrów polecenia ninja
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
-Requires:	bash-completion >= 2.0
+Requires:	bash-completion >= 1:2.0
 BuildArch:	noarch
 
 %description -n bash-completion-%{name}
