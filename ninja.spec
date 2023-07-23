@@ -17,7 +17,7 @@ URL:		http://ninja-build.org/
 %{?with_doc:BuildRequires:	asciidoc}
 BuildRequires:	libstdc++-devel
 %{!?with_bootstrap:BuildRequires:	ninja >= 1.3}
-BuildRequires:	python >= 2.0
+BuildRequires:	python3
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.673
 Obsoletes:	ninja-build < 1.0.0-2
@@ -97,7 +97,7 @@ Tryb Ninja dla Emacsa.
 export CXX="%{__cxx}"
 export CFLAGS="%{rpmcxxflags} -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
 
-./configure.py \
+%{__python3} ./configure.py \
 	%{?with_bootstrap:--bootstrap} \
 	--verbose
 
