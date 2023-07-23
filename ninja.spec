@@ -18,6 +18,7 @@ URL:		http://ninja-build.org/
 BuildRequires:	libstdc++-devel
 %{!?with_bootstrap:BuildRequires:	ninja >= 1.3}
 BuildRequires:	python3
+BuildRequires:	python3-modules
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.673
 Obsoletes:	ninja-build < 1.0.0-2
