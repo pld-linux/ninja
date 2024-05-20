@@ -15,7 +15,7 @@ Source0:	https://github.com/ninja-build/ninja/archive/v%{version}/%{name}-%{vers
 # Source0-md5:	6288992b05e593a391599692e2f7e490
 URL:		http://ninja-build.org/
 %{?with_doc:BuildRequires:	asciidoc}
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:4.8.1
 %{!?with_bootstrap:BuildRequires:	ninja >= 1.3}
 BuildRequires:	python3
 BuildRequires:	python3-modules
