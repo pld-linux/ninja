@@ -6,13 +6,13 @@
 Summary:	A small build system with a focus on speed
 Summary(pl.UTF-8):	Mały system budowania ukierunkowany na szybkość
 Name:		ninja
-Version:	1.11.1
+Version:	1.12.1
 Release:	1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/ninja-build/ninja/releases
 Source0:	https://github.com/ninja-build/ninja/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	32151c08211d7ca3c1d832064f6939b0
+# Source0-md5:	6288992b05e593a391599692e2f7e490
 URL:		http://ninja-build.org/
 %{?with_doc:BuildRequires:	asciidoc}
 BuildRequires:	libstdc++-devel
